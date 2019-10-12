@@ -26,10 +26,10 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.49497475"
-     inkscape:cx="347.17631"
-     inkscape:cy="517.34778"
+     inkscape:cx="701.46042"
+     inkscape:cy="193.3517"
      inkscape:document-units="mm"
-     inkscape:current-layer="g871"
+     inkscape:current-layer="g887"
      showgrid="false"
      inkscape:window-width="1360"
      inkscape:window-height="703"
@@ -46,7 +46,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -61,30 +61,40 @@
       <g
          id="g879"
          transform="translate(-0.53453905,-10.690781)">
-        <circle
-           style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:3.36500001;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-           id="path819"
-           cx="67.279762"
-           cy="92.136902"
-           r="37.797619" />
-        <circle
-           style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:4.07375097;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-           id="path819-3"
-           cx="67.554901"
-           cy="91.785789"
-           r="45.75872" />
-        <flowRoot
-           xml:space="preserve"
-           id="flowRoot836"
-           style="font-style:normal;font-weight:normal;font-size:40px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
-           transform="matrix(0.26458333,0,0,0.26458333,12.294398,8.0180858)"><flowRegion
-             id="flowRegion838"><rect
-               id="rect840"
-               width="210.11172"
-               height="92.934036"
-               x="145.46196"
-               y="302.27582" /></flowRegion><flowPara
-             id="flowPara842">Inicio</flowPara></flowRoot>      </g>
+        <g
+           id="g4545">
+          <g
+             id="g887">
+            <circle
+               style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:3.36500001;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+               id="path819"
+               cx="67.279762"
+               cy="92.136902"
+               r="37.797619" />
+            <circle
+               style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:4.07375097;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+               id="path819-3"
+               cx="67.554901"
+               cy="91.785789"
+               r="45.75872" />
+            <text
+               xml:space="preserve"
+               style="font-style:normal;font-weight:normal;font-size:19.7555542px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+               x="40.625214"
+               y="99.059685"
+               id="text4684"><tspan
+                 sodipodi:role="line"
+                 x="40.625214"
+                 y="99.059685"
+                 id="tspan4682"
+                 style="stroke-width:0.26458332"><tspan
+                   x="40.625214"
+                   y="99.059685"
+                   id="tspan4680"
+                   style="stroke-width:0.26458332">Inicio</tspan></tspan></text>
+          </g>
+        </g>
+      </g>
     </g>
   </g>
 </svg>
