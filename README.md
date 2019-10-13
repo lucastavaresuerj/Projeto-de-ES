@@ -9,5 +9,5 @@ Simula em escala redusida um jogo, de dois jogadores, de basket. Um placar para 
 1. butão x3
 1. led x2
     
-##Maquina de estado
+##Maquina de estado placar
 ![](img/maquina_de_estado.svg)
