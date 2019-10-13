@@ -4,9 +4,9 @@ Simula em escala redusida um jogo, de dois jogadores, de basket. Um placar para 
 ## Componentes
 1. [HC-12](https://www.filipeflop.com/produto/modulo-rf-wireless-hc-12-com-antena/) x3
 1. [HC-SR04](https://www.filipeflop.com/produto/sensor-de-distancia-ultrassonico-hc-sr04/) x2
-1. busina x3
+1. buzina x3
 1. lcd x1
-1. butão x3
+1. botão x3
 1. led x2
     
 ## Maquina de estado placar
