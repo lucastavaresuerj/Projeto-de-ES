@@ -248,6 +248,53 @@
          transform="matrix(-0.8,0,0,-0.8,-10,0)"
          inkscape:connector-curvature="0" />
     </marker>
+    <marker
+       inkscape:stockid="Arrow1Lend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow1Lend-9"
+       style="overflow:visible"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         id="path874-37"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
+         transform="matrix(-0.8,0,0,-0.8,-10,0)"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow1Lend-9-8"
+       style="overflow:visible"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         id="path874-37-8"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
+         transform="matrix(-0.8,0,0,-0.8,-10,0)"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:isstock="true"
+       style="overflow:visible"
+       id="marker1583-1"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lend">
+      <path
+         transform="matrix(-0.8,0,0,-0.8,-10,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path1581-4"
+         inkscape:connector-curvature="0" />
+    </marker>
   </defs>
   <sodipodi:namedview
      id="base"
@@ -256,9 +303,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.175"
-     inkscape:cx="2262.8362"
-     inkscape:cy="196.73586"
+     inkscape:zoom="0.35"
+     inkscape:cx="-119.90101"
+     inkscape:cy="356.70228"
      inkscape:document-units="mm"
      inkscape:current-layer="g887"
      showgrid="true"
@@ -322,28 +369,28 @@
             <circle
                style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:3.36500001;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
                id="path819"
-               cx="91.328033"
-               cy="103.24837"
+               cx="-230.70699"
+               cy="110.05192"
                r="37.797619" />
             <circle
                style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:4.07375097;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
                id="path819-3"
-               cx="91.682259"
-               cy="103.33939"
+               cx="-230.35277"
+               cy="110.14295"
                r="45.75872" />
             <text
                xml:space="preserve"
                style="font-style:normal;font-weight:normal;font-size:19.7555542px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
-               x="64.752571"
-               y="110.61329"
+               x="-257.28244"
+               y="117.41685"
                id="text4684"><tspan
                  sodipodi:role="line"
-                 x="64.752571"
-                 y="110.61329"
+                 x="-257.28244"
+                 y="117.41685"
                  id="tspan4682"
                  style="stroke-width:0.26458332"><tspan
-                   x="64.752571"
-                   y="110.61329"
+                   x="-257.28244"
+                   y="117.41685"
                    id="tspan4680"
                    style="stroke-width:0.26458332">Inicio</tspan></tspan></text>
             <circle
@@ -384,22 +431,22 @@
                    style="stroke-width:0.26458332">pelo tempo</tspan></tspan></text>
             <path
                style="fill:none;stroke:#000000;stroke-width:0.96499997;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#Arrow1Lend)"
-               d="m 130.98543,72.456102 c 0,0 36.05069,-14.241952 89.20238,0"
+               d="m -191.04959,79.259659 c 0,0 36.05069,-14.241952 89.20238,0"
                id="path61"
                inkscape:connector-curvature="0" />
             <text
                xml:space="preserve"
                style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
-               x="143.51848"
-               y="63.618385"
+               x="-178.51654"
+               y="70.421944"
                id="text2026"><tspan
                  sodipodi:role="line"
-                 x="143.51848"
-                 y="63.618385"
+                 x="-178.51654"
+                 y="70.421944"
                  id="tspan2024"
                  style="stroke-width:0.26458332"><tspan
-                   x="143.51848"
-                   y="63.618385"
+                   x="-178.51654"
+                   y="70.421944"
                    id="tspan2022"
                    style="stroke-width:0.26458332">btn de inicio</tspan></tspan></text>
             <text
@@ -610,7 +657,7 @@
                    y="96.532478"
                    style="text-align:start;text-anchor:start;stroke-width:0.26458278"
                    id="tspan395"
-                   dx="0 0 0 0 0 0 0 0 0 0 0 0">qunatidade </tspan></tspan><tspan
+                   dx="0 0 0 0 0 0 0 0 0 0 0 0">quantidade </tspan></tspan><tspan
                  sodipodi:role="line"
                  x="430.02759"
                  y="109.76161"
@@ -807,18 +854,111 @@
             <text
                xml:space="preserve"
                style="font-style:normal;font-weight:normal;font-size:19.7555542px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
-               x="919.91608"
-               y="110.83935"
+               x="916.70886"
+               y="101.21767"
                id="text4684-7"><tspan
                  sodipodi:role="line"
-                 x="919.91608"
-                 y="110.83935"
+                 x="916.70886"
+                 y="101.21767"
                  id="tspan4682-6"
-                 style="stroke-width:0.26458332"><tspan
-                   x="919.91608"
-                   y="110.83935"
-                   id="tspan4680-5"
-                   style="stroke-width:0.26458332">Inicio</tspan></tspan></text>
+                 style="stroke-width:0.26458332">iniciar<tspan
+   x="916.70886"
+   y="101.21767"
+   id="tspan4680-5"
+   style="stroke-width:0.26458332" /></tspan><tspan
+                 sodipodi:role="line"
+                 x="916.70886"
+                 y="125.9121"
+                 style="stroke-width:0.26458332"
+                 id="tspan679">jogo</tspan></text>
+            <circle
+               style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:3.36500001;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+               id="path819-36-6"
+               cx="-62.069389"
+               cy="108.54002"
+               r="37.797619" />
+            <path
+               style="fill:none;stroke:#000000;stroke-width:0.96499997;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#Arrow1Lend-9)"
+               d="m 148.37229,72.456105 c 0,0 36.05069,-14.24195 89.20238,0"
+               id="path61-4"
+               inkscape:connector-curvature="0" />
+            <circle
+               style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:3.36500001;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+               id="path819-4-3"
+               cx="108.72898"
+               cy="106.84663"
+               r="37.797619" />
+            <text
+               xml:space="preserve"
+               style="font-style:normal;font-weight:normal;font-size:19.7555542px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+               x="109.17284"
+               y="104.58987"
+               id="text4684-7-0"><tspan
+                 sodipodi:role="line"
+                 x="78.946266"
+                 y="104.58987"
+                 id="tspan4682-6-7"
+                 style="stroke-width:0.26458332;text-anchor:middle;text-align:center">iniciar</tspan><tspan
+                 sodipodi:role="line"
+                 x="78.946266"
+                 y="129.2843"
+                 style="stroke-width:0.26458332;text-anchor:middle;text-align:center"
+                 id="tspan679-6">jogo</tspan></text>
+            <path
+               style="fill:none;stroke:#000000;stroke-width:0.96499997;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#Arrow1Lend-9-8)"
+               d="m -22.472577,73.968005 c 0,0 36.05069,-14.24195 89.20238,0"
+               id="path61-4-43"
+               inkscape:connector-curvature="0" />
+            <flowRoot
+               xml:space="preserve"
+               id="flowRoot729"
+               style="font-style:normal;font-weight:normal;font-size:40px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+               transform="matrix(0.26458276,0,0,0.26458276,39.350833,10.273531)"><flowRegion
+                 id="flowRegion731"><rect
+                   id="rect733"
+                   width="200"
+                   height="182.85716"
+                   x="-491.42856"
+                   y="322.79416" /></flowRegion><flowPara
+                 id="flowPara735">configurarede</flowPara><flowPara
+                 id="flowPara737" /></flowRoot>            <text
+               xml:space="preserve"
+               style="font-style:normal;font-weight:normal;font-size:10.58331013px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458275"
+               x="-17.345474"
+               y="161.44702"
+               id="text745"><tspan
+                 sodipodi:role="line"
+                 id="tspan743"
+                 x="-17.345474"
+                 y="170.81078"
+                 style="stroke-width:0.26458275" /></text>
+            <path
+               style="fill:none;stroke:#000000;stroke-width:0.96499997;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker1583-1)"
+               d="m -98.823354,146.86398 c 0,0 -2.267856,33.2619 34.017849,33.2619 36.285733,0 33.261913,-33.2619 33.261913,-33.2619"
+               id="path1567-9"
+               inkscape:connector-curvature="0" />
+            <flowRoot
+               xml:space="preserve"
+               id="flowRoot768"
+               style="font-style:normal;font-weight:normal;font-size:40px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+               transform="matrix(0.26458276,0,0,0.26458276,43.886537,1.9580733)"><flowRegion
+                 id="flowRegion770"><rect
+                   id="rect772"
+                   width="245.71428"
+                   height="114.28571"
+                   x="-520"
+                   y="694.22272" /></flowRegion><flowPara
+                 id="flowPara774">pareando</flowPara></flowRoot>            <text
+               xml:space="preserve"
+               style="font-style:normal;font-weight:normal;font-size:10.58331013px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458275"
+               x="0.041394237"
+               y="63.929371"
+               id="text778"><tspan
+                 sodipodi:role="line"
+                 id="tspan776"
+                 x="0.041394237"
+                 y="63.929371"
+                 style="stroke-width:0.26458275">timeout</tspan></text>
           </g>
         </g>
       </g>
