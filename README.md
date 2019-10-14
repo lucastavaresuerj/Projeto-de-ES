@@ -11,3 +11,6 @@ Simula, em escala reduzida, um jogo de basket entre dois jogadores. Um placar pa
     
 ## Maquina de estado placar
 ![](img/maquina_de_estado.svg)
+
+## Maquina de estado cestas
+![](img/maquina_de_estado_cesta.svg)
