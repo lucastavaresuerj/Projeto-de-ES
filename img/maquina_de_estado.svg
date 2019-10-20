@@ -319,7 +319,7 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.35"
-     inkscape:cx="3612.8114"
+     inkscape:cx="609.9543"
      inkscape:cy="400.35719"
      inkscape:document-units="mm"
      inkscape:current-layer="g887"
@@ -942,18 +942,22 @@
                d="m -98.823354,146.86398 c 0,0 -2.267856,33.2619 34.017849,33.2619 36.285733,0 33.261913,-33.2619 33.261913,-33.2619"
                id="path1567-9"
                inkscape:connector-curvature="0" />
-            <flowRoot
+            <text
                xml:space="preserve"
-               id="flowRoot768"
-               style="font-style:normal;font-weight:normal;font-size:40px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
-               transform="matrix(0.26458276,0,0,0.26458276,43.886537,1.9580733)"><flowRegion
-                 id="flowRegion770"><rect
-                   id="rect772"
-                   width="245.71428"
-                   height="114.28571"
-                   x="-520"
-                   y="694.22272" /></flowRegion><flowPara
-                 id="flowPara774">pareando</flowPara></flowRoot>            <text
+               style="font-style:normal;font-weight:normal;font-size:10.58331013px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458275"
+               x="-93.696495"
+               y="195.00117"
+               id="text210"><tspan
+                 sodipodi:role="line"
+                 x="-93.696495"
+                 y="195.00117"
+                 id="tspan208"
+                 style="stroke-width:0.26458275"><tspan
+                   x="-93.696495"
+                   y="195.00117"
+                   id="tspan206"
+                   style="stroke-width:0.26458275">pareando</tspan></tspan></text>
+            <text
                xml:space="preserve"
                style="font-style:normal;font-weight:normal;font-size:10.58331013px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458275"
                x="0.041394237"
@@ -1028,6 +1032,54 @@
                  y="111.51326"
                  style="stroke-width:0.26458332"
                  id="tspan307-8">para jogo</tspan></text>
+            <flowRoot
+               xml:space="preserve"
+               id="flowRoot181"
+               style="fill:black;fill-opacity:1;stroke:none;font-family:sans-serif;font-style:normal;font-weight:normal;font-size:40px;line-height:1.25;letter-spacing:0px;word-spacing:0px"><flowRegion
+                 id="flowRegion183"><rect
+                   id="rect185"
+                   width="154.28572"
+                   height="145.71428"
+                   x="348.57144"
+                   y="-308.6344" /></flowRegion><flowPara
+                 id="flowPara187" /></flowRoot>            <flowRoot
+               xml:space="preserve"
+               id="flowRoot189"
+               style="fill:#000000;fill-opacity:0;stroke:none;font-family:sans-serif;font-style:normal;font-weight:normal;font-size:64px;line-height:1.25;letter-spacing:0px;word-spacing:0px;"><flowRegion
+                 id="flowRegion191"
+                 style="font-size:64px;fill:#000000;fill-opacity:0;"><rect
+                   id="rect193"
+                   width="820.00006"
+                   height="77.14286"
+                   x="374.28571"
+                   y="48.508457"
+                   style="font-size:64px;fill:#000000;fill-opacity:0;" /></flowRegion><flowPara
+                 id="flowPara195" /></flowRoot>            <flowRoot
+               xml:space="preserve"
+               id="flowRoot197"
+               style="font-style:normal;font-weight:normal;font-size:40px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+               transform="matrix(0.26458276,0,0,0.26458276,-278.14867,1.9580733)"><flowRegion
+                 id="flowRegion199"><rect
+                   id="rect201"
+                   width="340"
+                   height="317.14285"
+                   x="540"
+                   y="-291.49155" /></flowRegion><flowPara
+                 id="flowPara203" /></flowRoot>            <text
+               xml:space="preserve"
+               style="font-style:normal;font-weight:normal;font-size:10.58331013px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458275"
+               x="-168.53596"
+               y="31.286451"
+               id="text204"><tspan
+                 sodipodi:role="line"
+                 x="-168.53596"
+                 y="31.286451"
+                 id="tspan202"
+                 style="stroke-width:0.26458275"><tspan
+                   x="-168.53596"
+                   y="31.286451"
+                   style="font-size:16.9332962px;stroke-width:0.26458275"
+                   id="tspan200">texto invisivel</tspan></tspan></text>
           </g>
         </g>
       </g>
