@@ -19,6 +19,7 @@ void setup() {
 void loop() {
   while(HC12.available()) {
     op = HC12.read();
+    Serial.write(op);
     digitalWrite(pinledA, op==49);
     digitalWrite(pinledB, op==50);
   }

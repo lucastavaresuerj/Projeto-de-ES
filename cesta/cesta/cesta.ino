@@ -19,10 +19,12 @@ int btn = HIGH;
 
 SoftwareSerial HC12A(txA,rxA);
 SoftwareSerial HC12B(txB,rxB);
+//SoftwareSerial HC12(txB,rxB);
 
 void setup() {
   HC12A.begin(9600);
   HC12B.begin(9600);
+  //HC12.begin(9600);
   Serial.begin(9600);
   pinMode(buzzer, OUTPUT);
   pinMode(switchbtn, INPUT);
@@ -39,6 +41,7 @@ void loop() {
         if(distancia < 10) {
           Serial.println("cesta A");
           HC12A.write(49);
+          //HC12.write(49);
           tone(buzzer,NOTE_C3,1000/4);
           noTone(buzzer);
         }
@@ -55,6 +58,7 @@ void loop() {
         if(distancia < 10) {
           Serial.print("cesta B");
           HC12B.write(50);
+          //HC12.write(50);
           tone(buzzer,NOTE_C3,1000/4);
           noTone(buzzer);
         }
