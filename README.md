@@ -9,8 +9,8 @@ Simula, em escala reduzida, um jogo de basket entre dois jogadores. Um placar pa
 1. [botão](https://portuguese.alibaba.com/product-detail/tactile-tact-switch-momentary-push-button-switch-4-pin-dip-for-arduino-pcb-60618214513.html) x3
 1. [led](https://www.filipeflop.com/produto/led-emissor-infravermelho-ir-5mm/) x2
     
-## Maquina de estado placar @Nobrinks
+## Maquina de estado placar [@Nobrinks](https://github.com/Nobrinks)
 ![](img/maquina_de_estado.svg)
 
-## Maquina de estado cestas @lucastavaresuerj
+## Maquina de estado cestas [@lucastavaresuerj](https://github.com/lucastavaresuerj)
 ![](img/maquina_de_estado_cesta.svg)
