@@ -28,10 +28,12 @@ void loop() {
         ledA = HIGH;
         ledB = LOW;
         digitalWrite(pinledB,LOW);
+        break;
       case 50:
         ledB = HIGH;
         ledA = LOW;
         digitalWrite(pinledA,LOW);
+        break;
     }
     
   }
