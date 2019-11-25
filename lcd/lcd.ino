@@ -60,8 +60,8 @@ int op = 48;//0
 
 //adicionado
 SoftwareSerial HC12(tx,rx);
-int jogadores[4] = {0, 0, 0, 0}, estado=0;
-
+int jogadores[] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, estado=0;
+double tempoAtual=0;
 
 
 // initialize the library with the numbers of the interface pins
@@ -72,56 +72,59 @@ void setup() {
   Serial.begin(9600);
   lcd.begin(16, 2);
   pinMode(buttonInit, INPUT);
-  
   // Print a message to the LCD.
   
 
 }
-void welcome(){
-  lcd.print("Welcome to ");
-  lcd.setCursor(0, 1);
-  lcd.print("Basketball Game");
-  delay(5000);
-  lcd.setCursor(0, 0);
-  lcd.print("                ");
-  lcd.setCursor(0, 1);
-  lcd.print("                ");
-  estado = 1;
-}
 
 //vai esperar enviem algum dado, se receber então foi pareado
 void search(){
-  int syncTime=10000;
-  int playerID, qtdPlayers=0;
-  while(millis()<=syncTime){
-    lcd.setCursor(0, 0);
-    if(HC12.available()){
-      playerID=HC12.read();
-      if(!jogadores[playerID-48]){//se não existe, adiciona
-        jogadores[playerID-48]=(++qtdPlayers);
-        lcd.print("Jogador:"); lcd.print(playerID); lcd.print("entrou");
-        lcd.setCursor(0, 1);
-        lcd.print(qtdPlayers); lcd.print(" players");
-      }
+  lcd.setCursor(0, 0);
+  if(HC12.available()){
+    playerID=HC12.read();
+    if(!jogadores[playerID-48]){//se não existe, adiciona
+      jogadores[playerID-48]=(++qtdPlayers);
+      lcd.print("Jogador:"); lcd.print(playerID); lcd.print("entrou");
+      lcd.setCursor(0, 1);
+      lcd.print(qtdPlayers); lcd.print(" players");
     }
   }
-  lcd.setCursor(0, 0);
- 
 }
 
 void loop() {
   
   lcd.setCursor(0, 0);
   switch(estado){
-    case 0:
-      welcome();
-    break;
-    case 1:
+    case 0: //WELLCOME 
+      if(tempoAtual == 0) {
+        lcd.print("Welcome to ");
+        lcd.setCursor(0, 1);
+        lcd.print("Basketball Game");
       if(!digitalRead(buttonInit)){
+        estado=1;
+        lcd.setCursor(0, 1);
+        lcd.print("                ");
+        lcd.setCursor(0, 0);
+        lcd.print("Waiting  Players");
+        tempoAtual=millis();
+      }
+    break;
+    case 1: //pareamento com jogadores
+      double syncTime=10000;
+      if((millis()-tempoAtual)<=syncTime && (qtdPlayers<2)){
+        search();
+      }
+      else{
+        lcd.setCursor(0, 0);
         estado=2;
       }
     break;
-    case 2:
+    case 2: //duracao da partida
+      if(!digitalRead(buttonInit)){
+        
+      }
+    break;
+    case 3: //
       
     break;
   }
