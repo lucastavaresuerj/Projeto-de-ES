@@ -1,3 +1,8 @@
+#include <Multiplexer.h>
+#include <EasyTransfer2.h>
+#include <LineFollow.h>
+#include <ArduinoRobotMotorBoard.h>
+
 //PROGRAMA DE TESTES DO PLACAR
 
 /*
@@ -41,15 +46,13 @@
 
 // include the library code:
 #include <LiquidCrystal.h>
-//Multifunction Module - Display
-#include <TimerOne.h>                     // Bibliotec TimerOne 
 #include <Wire.h>                         // Biblioteca Wire 
-#include <MultiFuncShield.h>              // Biblioteca Multifunction shield
 
 int pontuacaoA=0, pontuacaoB=0, players[10];
 
 //receptor
 #include<SoftwareSerial.h>
+#define syncTime 10000;
 #define tx 9
 #define rx 10
 #define pinledA 3
@@ -60,7 +63,7 @@ int op = 48;//0
 
 //adicionado
 SoftwareSerial HC12(tx,rx);
-int jogadores[] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, estado=0, pres=0, tempo;
+int jogadores[] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, estado=0, pres=0, tempo, qtdPlayers=0;
 double tempoAtual=0;
 
 
@@ -79,6 +82,7 @@ void setup() {
 
 //vai esperar enviem algum dado, se receber então foi pareado
 void search(){
+  int playerID;
   lcd.setCursor(0, 0);
   if(HC12.available()){
     playerID=HC12.read();
@@ -119,7 +123,7 @@ void loop() {
     break;
     
     case 1: //pareamento com jogadores
-      double syncTime=10000;
+       
       if((millis()-tempoAtual)<=syncTime && (qtdPlayers<2)){
         search();
       }
@@ -148,16 +152,22 @@ void loop() {
       else if(!digitalRead(buttonInit) && pres){
         if((millis()-tempoAtual)>= 750){
           estado=3;
+          tempo = tempo*60;
+          lcd.setCursor(0,0);
         }
       }
       tempoAtual=millis();
     break;
     
     case 3: //
-      
+      lcd.print("Player 1");
+      lcd.print("Player 2");
+      tempoInicioJogo = millis();
+    break;
+    case 4:
+      gameTime(tempo - tempoInicioJogo/1000);
     break;
   }
-  
   // set the cursor to column 0, line 1
   // (note: line 1 is the second row, since counting begins with 0):
   //lcd.setCursor(4, 1);
@@ -170,11 +180,15 @@ void loop() {
 }
 //https://www.hackster.io/YoussefSabaa/lcd-display-in-real-time-ea0b7b
 void gameTime(long long int intervalo){
-  long long int seg=-1, mn=0, hora=0, tempo=0;
-  while(tempo<=intervalo){
-    (++seg)%=600;
-    mn+=(seg+1)/600;
-    mn%=600;
-    hora+=
+  static long long int seg=-1, mn=0,tempo=0;
+  if(intervalo<60){
+    lcd.setCursor(7, 1);
+    lcd.print(intervalo); 
   }
+  mn = intervalo/60;
+  seg = intervalo%60;
+  lcd.setCursor(5, 1);
+  lcd.print(mn);
+  lcd.setCursor(7, 1);
+  lcd.print(seg);
 }
