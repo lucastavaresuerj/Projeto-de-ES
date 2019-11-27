@@ -1,4 +1,4 @@
-//cesta
+//cesta.
 #include<SoftwareSerial.h>
 #include "Ultrasonic.h"
 #include "notas.h"

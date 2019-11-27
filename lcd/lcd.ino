@@ -60,7 +60,7 @@ int op = 48;//0
 
 //adicionado
 SoftwareSerial HC12(tx,rx);
-int jogadores[] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, estado=0;
+int jogadores[] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, estado=0, pres=0, tempo;
 double tempoAtual=0;
 
 
@@ -91,12 +91,20 @@ void search(){
   }
 }
 
+int tempoJogo(){
+  static int duracao[]={2, 3, 5, 10, 15}, it=-1;
+  static const int tm = 5;
+  (++it)%=tm;
+  return duracao[it];
+}
+
 void loop() {
   
-  lcd.setCursor(0, 0);
   switch(estado){
+    
     case 0: //WELLCOME 
       if(tempoAtual == 0) {
+        lcd.setCursor(0, 0);
         lcd.print("Welcome to ");
         lcd.setCursor(0, 1);
         lcd.print("Basketball Game");
@@ -109,6 +117,7 @@ void loop() {
         tempoAtual=millis();
       }
     break;
+    
     case 1: //pareamento com jogadores
       double syncTime=10000;
       if((millis()-tempoAtual)<=syncTime && (qtdPlayers<2)){
@@ -116,14 +125,34 @@ void loop() {
       }
       else{
         lcd.setCursor(0, 0);
+        lcd.print("game time-pressB");
+        lcd.setCursor(0,1);
         estado=2;
+        tempoAtual=millis();
       }
     break;
+    
     case 2: //duracao da partida
-      if(!digitalRead(buttonInit)){
-        
+    //verifica se foi pressionado, sim->muda de estado, não->permanece e muda duração
+      if(!digitalRead(buttonInit) && !pres){
+        pres=!pres;
       }
+      else if(digitalRead(buttonInit) && pres){
+        pres=!pres;
+        lcd.setCursor(0, 1);
+        lcd.print("                ");
+        lcd.setCursor(0, 1);
+        tempo=tempoJogo();
+        lcd.print("select: "); lcd.print(tempo); lcd.print(" min");
+      }
+      else if(!digitalRead(buttonInit) && pres){
+        if((millis()-tempoAtual)>= 750){
+          estado=3;
+        }
+      }
+      tempoAtual=millis();
     break;
+    
     case 3: //
       
     break;
@@ -140,9 +169,12 @@ void loop() {
   
 }
 //https://www.hackster.io/YoussefSabaa/lcd-display-in-real-time-ea0b7b
-void time(long long int intervalo){
-  long long int seg=0, min=0, hora=0, tempo=0;
+void gameTime(long long int intervalo){
+  long long int seg=-1, mn=0, hora=0, tempo=0;
   while(tempo<=intervalo){
-    
+    (++seg)%=600;
+    mn+=(seg+1)/600;
+    mn%=600;
+    hora+=
   }
 }
