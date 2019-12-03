@@ -1,11 +1,11 @@
-#include <Multiplexer.h>
-#include <EasyTransfer2.h>
-#include <LineFollow.h>
-#include <ArduinoRobotMotorBoard.h>
+//#include <Multiplexer.h>
+//#include <EasyTransfer2.h>
+//#include <LineFollow.h>
+//#include <ArduinoRobotMotorBoard.h>
 
 //PROGRAMA DE TESTES DO PLACAR
-
 /*
+
   LiquidCrystal Library - Hello World
 
  Demonstrates the use a 16x2 LCD display.  The LiquidCrystal
@@ -47,26 +47,22 @@
 // include the library code:
 #include <LiquidCrystal.h>
 #include <Wire.h>                         // Biblioteca Wire 
-
-int pontuacaoA=0, pontuacaoB=0, players[10];
-
-//receptor
 #include<SoftwareSerial.h>
-#define syncTime 10000;
+#define syncTime 10000
 #define tx 9
 #define rx 10
 #define pinledA 3
 #define pinledB 2//mudei do pin 4 para o 12 green light
 #define buttonInit 8//foi usado para teste no arduino da cesta o pin 2, no arduino do placar vai ser o 8
 
-int op = 48;//0
+int pontuacaoA=0, pontuacaoB=0;
+int cod = 48;//0
+int estado=0, pres=0, tempo, qtdPlayers=0;
+long tempoAtual=0, tempoInicioJogo;
 
-//adicionado
+enum nomeCodigos {ponto1, ponto2, pareando1, pareando2, comeco_jogo, fim_jogo, pareado1, pareado2};
+int codigos[] = {1, 2, 3, 4, 5, 6, 9, 10};
 SoftwareSerial HC12(tx,rx);
-int jogadores[] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, estado=0, pres=0, tempo, qtdPlayers=0;
-double tempoAtual=0;
-
-
 // initialize the library with the numbers of the interface pins
 LiquidCrystal lcd(12, 11, 5, 4, 3, 2);
 
@@ -76,22 +72,19 @@ void setup() {
   lcd.begin(16, 2);
   pinMode(buttonInit, INPUT);
   // Print a message to the LCD.
-  
-
 }
+
 
 //vai esperar enviem algum dado, se receber então foi pareado
 void search(){
-  int playerID;
-  lcd.setCursor(0, 0);
   if(HC12.available()){
-    playerID=HC12.read();
-    if(!jogadores[playerID-48]){//se não existe, adiciona
-      jogadores[playerID-48]=(++qtdPlayers);
-      lcd.print("Jogador:"); lcd.print(playerID); lcd.print("entrou");
-      lcd.setCursor(0, 1);
-      lcd.print(qtdPlayers); lcd.print(" players");
-    }
+    cod=HC12.read()-48;
+    if(cod == codigos[pareando1] || cod == codigos[pareando2] )
+    qtdPlayers++;
+    lcd.setCursor(0, 0);
+    lcd.print("Jogador:"); lcd.print( (cod % 2) + 1); lcd.print("entrou");
+    lcd.setCursor(0, 1);
+    lcd.print(qtdPlayers); lcd.print(" players");
   }
 }
 
@@ -102,16 +95,29 @@ int tempoJogo(){
   return duracao[it];
 }
 
+void gameTime(long tempo){
+  long seg=-1, mn=0;
+  if(tempo<60){
+    lcd.setCursor(7, 1);
+    lcd.print(tempo); 
+  }
+  mn = tempo/60;
+  seg = tempo%60;
+  lcd.setCursor(5, 1);
+  lcd.print(mn);
+  lcd.setCursor(7, 1);
+  lcd.print(seg);
+}
+
 void loop() {
-  
-  switch(estado){
-    
+  switch(estado) {
     case 0: //WELLCOME 
       if(tempoAtual == 0) {
         lcd.setCursor(0, 0);
         lcd.print("Welcome to ");
         lcd.setCursor(0, 1);
         lcd.print("Basketball Game");
+      }
       if(!digitalRead(buttonInit)){
         estado=1;
         lcd.setCursor(0, 1);
@@ -121,13 +127,11 @@ void loop() {
         tempoAtual=millis();
       }
     break;
-    
     case 1: //pareamento com jogadores
-       
-      if((millis()-tempoAtual)<=syncTime && (qtdPlayers<2)){
+      if ( ((millis() - tempoAtual) <= syncTime) && (qtdPlayers<2) ) {
         search();
       }
-      else{
+      else {
         lcd.setCursor(0, 0);
         lcd.print("game time-pressB");
         lcd.setCursor(0,1);
@@ -135,7 +139,6 @@ void loop() {
         tempoAtual=millis();
       }
     break;
-    
     case 2: //duracao da partida
     //verifica se foi pressionado, sim->muda de estado, não->permanece e muda duração
       if(!digitalRead(buttonInit) && !pres){
@@ -168,27 +171,5 @@ void loop() {
       gameTime(tempo - tempoInicioJogo/1000);
     break;
   }
-  // set the cursor to column 0, line 1
-  // (note: line 1 is the second row, since counting begins with 0):
-  //lcd.setCursor(4, 1);
-  // print the number of seconds since reset:
-  //lcd.print(300 - millis() / 1000);
-  
-  ///lcd.setCursor(0, 1);
-  //lcd.print((millis()+1000) / 1000);
-  
 }
 //https://www.hackster.io/YoussefSabaa/lcd-display-in-real-time-ea0b7b
-void gameTime(long long int intervalo){
-  static long long int seg=-1, mn=0,tempo=0;
-  if(intervalo<60){
-    lcd.setCursor(7, 1);
-    lcd.print(intervalo); 
-  }
-  mn = intervalo/60;
-  seg = intervalo%60;
-  lcd.setCursor(5, 1);
-  lcd.print(mn);
-  lcd.setCursor(7, 1);
-  lcd.print(seg);
-}

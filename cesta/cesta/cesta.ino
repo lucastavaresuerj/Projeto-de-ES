@@ -12,11 +12,11 @@
 #define timeOutMusica 60
 #define cesta1 true // false for cesta2
 
-enum nomeCodigos {ponto, pareado, comeco_jogo, fim_jogo};
-#if cesta1
-int codigos[] = {1, 3, 5, 6};
+enum nomeCodigos {ponto, pareado, comeco_jogo, fim_jogo, pareando};
+#if cesta1 //TODO remover na tabela de codigos os que nao sao usados
+int codigos[] = {1, 9, 5, 6, 3};
 #else
-int codigos[] = {2, 4, 5, 6};
+int codigos[] = {2, 10, 5, 6, 4};
 #endif
 
 Ultrasonic ultrasonic(trig,echo); //INICIALIZANDO OS PINOS
@@ -55,7 +55,7 @@ void loop() {
         break;
       case CONFIGURAR_REDE:
         tempoAtual = millis();
-        if(tempoAtual - tempoInicio <= timeOut && HC12.available()) {
+        if(tempoAtual - tempoInicio <= timeOut && HC12.available()) { //pareado
           cod = HC12.read()-48;
           if (cod == codigos[pareado]) {
             estado = EM_ESPERA;
@@ -63,6 +63,9 @@ void loop() {
         }
         else if(tempoAtual - tempoInicio > timeOut) {
           estado = INICIO;
+        }
+        else {
+           HC12.write(codigos[pareando]);
         }
         break;
       case EM_ESPERA: //TODO mudar na maquina de estados, agora muda de estado quando o placar manda
@@ -107,7 +110,7 @@ void loop() {
          * ESPACO RESERVADO PARA TOCAR A MUSICA
          * SEM TRAVAR O SISTEMA
          * COMO?
-         * EU NAO SEI
+         * EU NAO SEI AINDA
          * 
          */
         break;
