@@ -1,86 +1,115 @@
-//cesta.
+//cesta
 #include<SoftwareSerial.h>
 #include "Ultrasonic.h"
 #include "notas.h"
-#define txA 11
-#define rxA 10
-#define txB 6
-#define rxB 5
-#define switchbtn 2
+#define tx 11
+#define rx 10
+#define btn 2
 #define buzzer 3
 #define trig 8
 #define echo 9
+#define timeOut 120
+#define timeOutMusica 60
+#define cesta1 true // false for cesta2
+
+enum nomeCodigos {ponto, pareado, comeco_jogo, fim_jogo};
+#if cesta1
+int codigos[] = {1, 3, 5, 6};
+#else
+int codigos[] = {2, 4, 5, 6};
+#endif
 
 Ultrasonic ultrasonic(trig,echo); //INICIALIZANDO OS PINOS
 
-int estado = 0;
-int distancia;
-int btn = HIGH;
-
-SoftwareSerial HC12A(txA,rxA);
-SoftwareSerial HC12B(txB,rxB);
-//SoftwareSerial HC12(txB,rxB);
+int cod = 0; //codigos que serao lidos dos receptores
+long distancia;
+int btnEstado = HIGH;
+unsigned long tempoInicio, tempoAtual;
+enum estados {INICIO, CONFIGURAR_REDE, EM_ESPERA, JOGO, TOCAR_MUSICA };
+estados estado = INICIO;
+SoftwareSerial HC12(tx,rx);
 
 void setup() {
-  HC12A.begin(9600);
-  HC12B.begin(9600);
-  //HC12.begin(9600);
+  HC12.begin(9600);
   Serial.begin(9600);
   pinMode(buzzer, OUTPUT);
-  pinMode(switchbtn, INPUT);
+  pinMode(btn, INPUT);
   pinMode(echo, INPUT); //DEFINE O PINO COMO ENTRADA (RECEBE)
   pinMode(trig, OUTPUT); //DEFINE O PINO COMO SAÍDA (ENVIA)
   Ultrasonic ultrasonic(trig,echo); //INICIALIZANDO OS PINOS
+  estados estado = INICIO;
 }
 
 void loop() {
     Serial.print("estado: ");Serial.println(estado);
     switch(estado) {
-      case 0:
-        hcsr04();
-        if(distancia < 10) {
-          Serial.println("cesta A");
-          HC12A.write(49);
-          //HC12.write(49);
-          tone(buzzer,NOTE_C3,1000/4);
-          noTone(buzzer);
-        }
-        else if(!digitalRead(switchbtn) && btn) {
-          btn = LOW;
+      case INICIO:
+        if(!digitalRead(btn) && btnEstado) {
+          btnEstado = LOW;
         } 
-        else if(digitalRead(switchbtn) != btn) {
-          btn = HIGH;
-          estado = 1;
+        else if(digitalRead(btn) != btnEstado) {
+          btnEstado = HIGH;
+          tempoInicio = millis();
+          estado = CONFIGURAR_REDE;
+        }  
+        break;
+      case CONFIGURAR_REDE:
+        tempoAtual = millis();
+        if(tempoAtual - tempoInicio <= timeOut && HC12.available()) {
+          cod = HC12.read()-48;
+          if (cod == codigos[pareado]) {
+            estado = EM_ESPERA;
+          }
+        }
+        else if(tempoAtual - tempoInicio > timeOut) {
+          estado = INICIO;
         }
         break;
-      case 1:
-        hcsr04();
+      case EM_ESPERA: //TODO mudar na maquina de estados, agora muda de estado quando o placar manda
+        if(HC12.available()){
+          cod = HC12.read()-48;
+          if(cod==codigos[comeco_jogo]){
+            estado = JOGO;
+          }
+        }
+        break;
+      case JOGO:
+        distancia = ultrasonic.Ranging(CM);
         if(distancia < 10) {
-          Serial.print("cesta B");
-          HC12B.write(50);
-          //HC12.write(50);
+          Serial.print("cesta");
+          HC12.write(codigos[ponto]+48);
           tone(buzzer,NOTE_C3,1000/4);
           noTone(buzzer);
         }
-        else if(!digitalRead(switchbtn) && btn) {
-          btn = LOW;
-        } 
-        else if(digitalRead(switchbtn) != btn) {
-          btn = HIGH;
-          estado = 0;
+        else if(HC12.available()){
+          cod = HC12.read()-48;
+          if(cod == codigos[fim_jogo]) {
+            tempoInicio = millis();
+            estado = TOCAR_MUSICA;
+          }
         }
+        break;
+      case TOCAR_MUSICA:
+        tempoAtual = millis();
+        if(!digitalRead(btn) && btnEstado) {
+          btnEstado = LOW;
+        } 
+        else if(digitalRead(btn) != btnEstado) {
+          btnEstado = HIGH;
+          tempoInicio = millis();
+          estado = EM_ESPERA;
+        }
+        else if(tempoAtual - tempoInicio > timeOutMusica) {
+          estado = EM_ESPERA;
+        }
+        /*
+         * 
+         * ESPACO RESERVADO PARA TOCAR A MUSICA
+         * SEM TRAVAR O SISTEMA
+         * COMO?
+         * EU NAO SEI
+         * 
+         */
         break;
     }
-}
-
-void hcsr04(){
-  digitalWrite(trig, LOW); //SETA O PINO 6 COM UM PULSO BAIXO "LOW"
-  delayMicroseconds(2); // DELAY DE 2 MICROSSEGUNDOS
-  digitalWrite(trig, HIGH); //SETA O PINO 6 COM PULSO ALTO "HIGH"
-  delayMicroseconds(10); // DELAY DE 10 MICROSSEGUNDOS
-  digitalWrite(trig, LOW); //SETA O PINO 6 COM PULSO BAIXO "LOW" NOVAMENTE
-  // FUNÇÃO RANGING, FAZ A CONVERSÃO DO TEMPO DE
-  //RESPOSTA DO ECHO EM CENTÍMETROS E ARMAZENA
-  //NA VARIÁVEL "distancia"
-  distancia = (ultrasonic.Ranging(CM)); // VARIÁVEL GLOBAL RECEBE O VALOR DA DISTÂNCIA MEDIDA
 }
