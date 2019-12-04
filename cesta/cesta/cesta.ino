@@ -8,8 +8,8 @@
 #define buzzer 3
 #define trig 8
 #define echo 9
-#define timeOut 120
-#define timeOutMusica 60
+#define timeOut 30000
+#define timeOutMusica 60000
 #define cesta1 true // false for cesta2
 
 enum nomeCodigos {ponto, pareado, comeco_jogo, fim_jogo, pareando};
@@ -25,8 +25,8 @@ int cod = 0; //codigos que serao lidos dos receptores
 long distancia;
 int btnEstado = HIGH;
 unsigned long tempoInicio, tempoAtual;
-enum estados {INICIO, CONFIGURAR_REDE, EM_ESPERA, JOGO, TOCAR_MUSICA };
-estados estado = INICIO;
+enum estados {INICIO, CONFIGURAR_REDE, EM_ESPERA, JOGO, TOCAR_MUSICA, DEBUG };
+estados estado;
 SoftwareSerial HC12(tx,rx);
 
 void setup() {
@@ -37,13 +37,22 @@ void setup() {
   pinMode(echo, INPUT); //DEFINE O PINO COMO ENTRADA (RECEBE)
   pinMode(trig, OUTPUT); //DEFINE O PINO COMO SAÍDA (ENVIA)
   Ultrasonic ultrasonic(trig,echo); //INICIALIZANDO OS PINOS
-  estados estado = INICIO;
+  estado = DEBUG; // trocar para INICIO
+  tempoInicio = millis();
 }
 
 void loop() {
-    Serial.print("estado: ");Serial.println(estado);
+    //Serial.print("estado: ");Serial.println(estado);
     switch(estado) {
+      case DEBUG:
+        Serial.println("DEBUG");
+        if (HC12.available()) {
+          Serial.write(HC12.read());
+        }
+        
+      break;
       case INICIO:
+      Serial.println("INICIO");
         if(!digitalRead(btn) && btnEstado) {
           btnEstado = LOW;
         } 
@@ -54,21 +63,25 @@ void loop() {
         }  
         break;
       case CONFIGURAR_REDE:
+        Serial.println("CONFIGURAR_REDE");
         tempoAtual = millis();
-        if(tempoAtual - tempoInicio <= timeOut && HC12.available()) { //pareado
+        if( HC12.available() ) {
           cod = HC12.read()-48;
+          Serial.println(cod);
           if (cod == codigos[pareado]) {
             estado = EM_ESPERA;
           }
         }
         else if(tempoAtual - tempoInicio > timeOut) {
-          estado = INICIO;
+          estado = CONFIGURAR_REDE; // trocar para INICIO
+          tempoInicio = millis();
         }
         else {
-           HC12.write(codigos[pareando]);
+           HC12.write(codigos[pareando]+48);
         }
         break;
       case EM_ESPERA: //TODO mudar na maquina de estados, agora muda de estado quando o placar manda
+        Serial.println("EM_ESPERA");
         if(HC12.available()){
           cod = HC12.read()-48;
           if(cod==codigos[comeco_jogo]){
@@ -77,6 +90,7 @@ void loop() {
         }
         break;
       case JOGO:
+        Serial.println("JOGO");
         distancia = ultrasonic.Ranging(CM);
         if(distancia < 10) {
           Serial.print("cesta");
@@ -93,6 +107,7 @@ void loop() {
         }
         break;
       case TOCAR_MUSICA:
+        Serial.println("TOCAR_MUSICA");
         tempoAtual = millis();
         if(!digitalRead(btn) && btnEstado) {
           btnEstado = LOW;

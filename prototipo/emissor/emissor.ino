@@ -19,7 +19,9 @@ void loop() {
     btn = LOW;
   } else if(digitalRead(pinbtn) != btn) {
     //Serial.println("btn");
-    HC12.write(49);
-    btn = HIGH;
+    
   }
+  delay(1000);
+  HC12.write(49);
+  //btn = HIGH;
 }

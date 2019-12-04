@@ -1,7 +1,7 @@
 //receptor
 #include<SoftwareSerial.h>
-#define tx 10
-#define rx 11
+#define tx 9
+#define rx 10
 #define pinled 13
 
 bool led = false;
@@ -19,7 +19,7 @@ void loop() {
   while(HC12.available()) {
     op = HC12.read();
     if(op == 49) {
-      //Serial.write(op);
+      Serial.write(op);
       led = !led;
       digitalWrite(pinled, led);
     }
