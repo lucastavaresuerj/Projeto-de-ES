@@ -7,7 +7,7 @@
 #define buzzer 3
 #define trig 9
 #define echo 8
-#define cesta1 true // false for cesta2
+#define cesta1 false // false for cesta2
 
 enum nomeCodigos {ponto, comeco_jogo, fim_jogo, };
 #if cesta1 //TODO remover na tabela de codigos os que nao sao usados
