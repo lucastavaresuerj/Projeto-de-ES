@@ -8,13 +8,13 @@
 
 int pontuacaoA=0, pontuacaoB=0;
 int cod = 48;//0
-int pres=0, qtdPlayers=0;
+int pres=false, qtdPlayers=0;
 long tempoAtual=0, tempo, tempoInicioJogo;
 
-enum nomeCodigos {ponto1, ponto2, pareando1, pareando2, comeco_jogo, fim_jogo, pareado1, pareado2};
-int codigos[] = {1, 2, 3, 4, 5, 6, 9, 10};
+enum nomeCodigos {ponto1, ponto2, comeco_jogo, fim_jogo};
+int codigos[] = {1, 2, 3, 4};
 
-enum estados {INICIO, CONFIGURAR_REDE, EM_ESPERA, ESCOLHER_DURACAO, CONF_QUNATIDADE_JOGADORES, JOGO, MOSTRAR_PLACAR, DEBUG};
+enum estados {INICIO, ESCOLHER_DURACAO, CONF_QUANTIDADE_JOGADORES, JOGO, MOSTRAR_PLACAR, DEBUG};
 estados estado;
 
 SoftwareSerial HC12(tx,rx);
@@ -27,25 +27,9 @@ void setup() {
   Serial.begin(9600);
   lcd.begin(16, 2);
   pinMode(buttonInit, INPUT);
-  estado = DEBUG; //trocar para INICIO
+  estado = INICIO; //trocar para INICIO
   //Serial.println(estado);
 }
-
-
-//vai esperar enviem algum dado, se receber então foi pareado
-/*
-void search(){
-  if(HC12.available()){
-    cod=HC12.read()-48;
-    if(cod == codigos[pareando1] || cod == codigos[pareando2] )
-    qtdPlayers++;
-    lcd.setCursor(0, 0);
-    lcd.print("Jogador:"); lcd.print( (cod % 2) + 1); lcd.print("entrou");
-    lcd.setCursor(0, 1);
-    lcd.print(qtdPlayers); lcd.print(" players");
-  }
-}
-*/
 
 int tempoJogo(){
   static int duracao[]={2, 3, 5, 10, 15}, duracaoEscolhida=-1;
@@ -73,8 +57,8 @@ void loop() {
   switch(estado) {
     case DEBUG:
       Serial.println("DEBUG");
-      HC12.write(codigos[pareado1]+48);
-    break;
+      HC12.write("DEBUG");
+      break;
     case INICIO:
       Serial.println("INICIO");//WELLCOME
       if(tempoAtual == 0) {
@@ -89,63 +73,30 @@ void loop() {
       else if(digitalRead(buttonInit) && pres){
         pres=!pres;
         lcd.clear();
-        lcd.print("Waiting  Players");
+        lcd.print("Set Players ");
         tempoAtual=millis();
         qtdPlayers = 0;
-        estado = CONFIGURAR_REDE;
+        estado = CONF_QUANTIDADE_JOGADORES;
       }
-    break;
-    case CONFIGURAR_REDE: //pareamento com jogadores
-      Serial.println("CONFIGURAR_REDE");
+      break;
+    case CONF_QUANTIDADE_JOGADORES:
       if(!digitalRead(buttonInit) && !pres){
         pres=!pres;
+        tempoAtual = millis();
       }
       else if(digitalRead(buttonInit) && pres){
         pres=!pres;
-        tempoAtual = 0;
-        estado = INICIO;
-      }
-      else if ( ((millis() - tempoAtual) <= syncTime) && (qtdPlayers<2) ) {
-        //search();
-        if(HC12.available()){
-          cod=HC12.read()-48;
-          //Serial.println(cod);
-          if(cod == codigos[pareando1] || cod == codigos[pareando2] ){
-            qtdPlayers++;
-            Serial.println((cod)%2 == 1 ? codigos[pareado1]+48 : codigos[pareado2]+48);
-            HC12.write( (cod)%2 == 1 ? codigos[pareado1]+48 : codigos[pareado2]+48); 
-            lcd.setCursor(0, 0);
-            lcd.print("Jogador:"); lcd.print( (cod % 2) + 1); lcd.print(" entrou");
-            lcd.setCursor(0, 1);
-            lcd.print(qtdPlayers); lcd.print(" players");
-          }
-        }
-      }
-      else if( ((millis() - tempoAtual) > syncTime) && (qtdPlayers>1) ){
-        lcd.setCursor(0, 0);
-        lcd.print("Esperando para   ");
+        qtdPlayers = qtdPlayers%2 + 1;
         lcd.setCursor(0, 1);
-        lcd.print("Comecar jogo     ");
-        estado=EM_ESPERA;
-        tempoAtual=millis();
+        lcd.print("select: "); lcd.print(qtdPlayers); 
       }
-      else if(((millis() - tempoAtual) > syncTime)) {
-        tempoAtual = 0;
-        estado = INICIO;
-      } 
-    break;
-    case EM_ESPERA:
-      Serial.println("EM_ESPERA");
-      if(!digitalRead(buttonInit) && !pres){
+      else if( (!digitalRead(buttonInit) && pres) && ((millis()-tempoAtual)>= 750) ){
         pres=!pres;
-      }
-      else if(digitalRead(buttonInit) && pres){
-        pres=!pres;
-        estado = ESCOLHER_DURACAO;
+        estado=ESCOLHER_DURACAO;
         lcd.clear();
         lcd.print("  SET TIME GAME  ");
       }
-    break;
+      break;
     case ESCOLHER_DURACAO: //duracao da partida
       Serial.println("ESCOLHER_DURACAO"); 
       //verifica se foi pressionado, sim->muda de estado, não->permanece e muda duração
@@ -155,23 +106,21 @@ void loop() {
       }
       else if(digitalRead(buttonInit) && pres){
         pres=!pres;
-        /*
-        lcd.setCursor(0, 1);
-        lcd.print("                ");
-        */
         lcd.setCursor(0, 1);
         tempo=tempoJogo();
         lcd.print("select: "); lcd.print(tempo); lcd.print(" min");
       }
       else if(!digitalRead(buttonInit) && pres){
         if((millis()-tempoAtual)>= 750){
+          pres=!pres;
           estado=JOGO;
           pontuacaoA = pontuacaoB = 0;
           tempo = tempo*60*1000;
           lcd.setCursor(0,0);
-          (qtdPlayers == 2) ? lcd.print(" P1   tempo   P2  ") : lcd.print("  Placar  tempo  ");
+          (qtdPlayers == 2) ? lcd.print(" P1   TIME   P2 ") : lcd.print("  SCORE  TIME  ");
           lcd.setCursor(0,1);
           lcd.print("                ");
+          HC12.write(codigos[comeco_jogo] + 48);
         }
       }
       tempoInicioJogo=millis();
@@ -180,7 +129,7 @@ void loop() {
       Serial.println("JOGO");
       tempoAtual = millis();
       if (HC12.available()) {
-        cod = HC12.read();
+        cod = HC12.read() - 48;
         if(cod == codigos[ponto1]) {
           pontuacaoA++;
         }
@@ -200,15 +149,20 @@ void loop() {
           lcd.print(pontuacaoB);
         }
       }
-      lcd.setCursor( ((qtdPlayers == 1) ? 11 : 6 ), 1);
+      lcd.setCursor( ((qtdPlayers == 1) ? 9 : 6 ), 1);
       lcd.print(gameTime(tempoAtual/1000 - tempoInicioJogo/1000));
       if(tempoAtual - tempoInicioJogo > tempo ) {
+        HC12.write(codigos[fim_jogo] + 48);
+        tempoAtual = millis();
         estado = MOSTRAR_PLACAR;
-        HC12.write(codigos[fim_jogo]);
       }
     break;
     case MOSTRAR_PLACAR:
       Serial.println("MOSTRAR_PLACAR");
+      if(millis() - tempoAtual > 20000) {
+        tempoAtual = 0;
+        estado = INICIO;
+      }
     break;
   }
 }
