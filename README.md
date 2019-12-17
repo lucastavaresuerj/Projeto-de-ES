@@ -14,3 +14,8 @@ Simula, em escala reduzida, um jogo de basket entre dois jogadores. Um placar pa
 
 ## Maquina de estado cestas [@lucastavaresuerj](https://github.com/lucastavaresuerj)
 ![](img/maquina_de_estado_cesta.svg)
+
+
+## Video
+
+[![](http://img.youtube.com/vi/2UBISmvBPU0/0.jpg)](http://www.youtube.com/watch?v=2UBISmvBPU0 "Pontuação automatica de cesta de basquete com arduino")
